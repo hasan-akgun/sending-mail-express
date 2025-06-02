@@ -3,7 +3,7 @@ link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.c
 .header 
   h1.text-center.py-4.bg-primary CONTACT US 
 div.d-flex.justify-content-center.bg-info.py-5.my-0
-  form.col-md-2
+  form#form.col-md-2
     h2.nameHeader Name
     input#nameInput.form-control(type=text, title ="name")
     h2.mailHeader E-Mail 
@@ -11,24 +11,22 @@ div.d-flex.justify-content-center.bg-info.py-5.my-0
     h2 Contact us: 
     input#contentInput.form-control.pb-5(type="text", title="content")
     button#sendButton.btn.btn-primary(type="button") SEND
+h3#success.text-center.invisible Message sent
 
 script.
   let name='';
   document.getElementById('nameInput').addEventListener('input', function(e) {
     name = e.target.value;
-    console.log(name);
   });
 
   let email='';
   document.getElementById('mailInput').addEventListener('input', function(e) {
     email = e.target.value;
-    console.log(email);
   });
 
   let content='';
   document.getElementById('contentInput').addEventListener('input', function(e) {
     content = e.target.value;
-    console.log(content);
   });
 
   document.getElementById('sendButton').addEventListener('click', async function() {
@@ -47,6 +45,22 @@ script.
 
       const result = await response.json();
       console.log(result);
+
+      if(result.success===false){
+        document.getElementById('form').reset();
+
+        document.getElementById('success').innerText = 'Something went wrong'
+        
+        document.getElementById('success').classList.remove('invisible');
+        document.getElementById('success').classList.add('visible');
+      }
+      else{
+        document.getElementById('success').innerText = 'Message Sent!'
+        document.getElementById('success').classList.remove('invisible');
+        document.getElementById('success').classList.add('visible');
+      }
+      
+      
 
     }catch(error){
       console.log(error);
