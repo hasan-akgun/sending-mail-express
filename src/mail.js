@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 const mailOption = (receiverMail, receiverName) => {
   return {
     from: `"Hasan" ${process.env.USER} `,
-    to: receiverMail, // Birden fazla alıcı virgülle ayrılabilir
+    to: receiverMail,
     subject: 'Thank you for contacting us!',
     text: `Hello ${receiverName}`,
   }
